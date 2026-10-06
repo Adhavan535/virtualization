@@ -1,0 +1,65 @@
+METHOD 2 — Shared Folder
+Step 1: Create Shared Folder on Host
+Create folder on Windows, e.g.:
+
+C:\VMShared
+Put a test file inside, e.g. 22IT043.txt.
+
+Step 2: Enable Shared Folder in Both VMs
+For VM1 and VM2:
+
+Shut down VM.
+
+VirtualBox → Select VM → Settings.
+
+Go to Shared Folders.
+
+Click +.
+
+Set:
+
+Folder Path: C:\VMShared
+
+Folder Name: VMShared
+
+Tick Auto-mount
+
+Click OK → OK. 
+
+
+Step 3: Insert Guest Additions
+Inside each VM:
+
+VirtualBox menu → Devices → Insert Guest Additions CD Image
+
+Step 4: Check Shared Folder
+ls /media
+You should see:
+
+sf_VMShared
+Then:
+
+ls /media/sf_VMShared
+You should see:
+
+22IT043.txt
+
+
+Step 5: If Permission Denied
+sudo usermod -aG vboxsf $USER
+Then reboot:
+
+sudo reboot
+After reboot:
+
+ls /media/sf_VMShared
+
+
+Step 6: Transfer File VM1 → VM2
+In VM1:
+
+cp VM1.txt /media/sf_VMShared/
+In VM2:
+
+ls /media/sf_VMShared
+VM1.txt will appear in VM2. Changes made in the shared folder are reflected in both VMs.

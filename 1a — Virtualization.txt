@@ -1,0 +1,30 @@
+1a — Virtualization
+Virtualization: Creating a virtual version of hardware/software resources.
+Hardware: Multiple VMs on one physical machine.
+Full Virtualization: Complete hardware is simulated.
+Para-Virtualization: Guest OS directly communicates with hypervisor.
+Type 1 Hypervisor: Runs directly on hardware.
+Type 2 Hypervisor: Runs on a host OS.
+OS Virtualization: Runs containers using a shared kernel.
+Server Virtualization: One physical server → multiple virtual servers.
+Storage Virtualization: Combines storage into one virtual pool.
+Network Virtualization: Physical network → logical/software network.
+Desktop Virtualization: Desktop runs on server and is accessed remotely.
+Application Virtualization: Apps run separately from the underlying OS.
+1b — Linux Commands
+ls: List files
+cd: Change directory
+pwd: Show current path
+mkdir: Create folder
+rm: Delete
+cp: Copy
+mv: Move/Rename
+touch: Create empty file
+cat: Display file content
+nano: Edit file
+grep: Search text
+ps: Show processes
+top: Show running tasks/resources
+kill: Stop a process
+df: Show disk space
+du: Show file/folder disk usage

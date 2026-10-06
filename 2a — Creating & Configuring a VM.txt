@@ -1,0 +1,33 @@
+2a — Creating & Configuring a VM
+VM: Virtual Machine.
+RAM: Memory given to the VM.
+Virtual Hard Disk: Storage for the VM.
+Network Adapter: Connects VM to a network.
+Bridged Adapter: VM gets network/LAN access.
+Host-Only Adapter: VM communicates with host/other VMs.
+Result: VM created with storage, memory and network.
+2b — VM-VM & VM-Native Ping
+Ping: Checks whether a device/VM is reachable.
+VM-VM Ping: One VM checks another VM.
+VM-Native Ping: VM checks the host computer.
+IP Address: Unique address of a device/VM on the network.
+Host-Only Network: Allows communication between host and VMs.
+ip a: Shows IP address in Linux.
+ipconfig: Shows IP address in Windows.
+ping <IP>: Tests connectivity.
+public class adhav {
+    public static void main(String args[]) {
+        long st = System.nanoTime();
+        long sum = 0;
+
+        for (long i = 0; i < 1000000000L; i++) {
+            sum += i;
+        }
+
+        long et = System.nanoTime();
+        double ds = (et - st) / 1000000000.0;
+
+        System.out.println("sum is " + sum);
+        System.out.println("Execution Time " + ds + " seconds");
+    }
+}

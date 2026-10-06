@@ -1,0 +1,110 @@
+
+4 a) Installation of Citrix XenServer 1 b) Live Migration of
+Virtual Machines using Xen Center
+Aim:
+To install and configure Citrix XenServer for virtualization of multiple
+operating systems , use Xen Center for graphical management of virtual machines
+and perform live migration of VMs between physical hosts without downtime.
+Xen
+Xen is a Type 1 (bare-metal) hypervisor that enables the execution of
+multiple virtual machines (VMs) on a single physical machine by abstracting the
+hardware. It supports both paravirtualization and hardware-assisted full
+virtualization (via Intel VT or AMD-V).
+Virtualization Type: Para or Full?
+Feature Xen
+Supports Both Paravirtualization (PV) and Hardware-assisted Full
+Virtualization (HVM)
+Default Mode Originally designed for Paravirtualization (efficient, faster)With Hardware
+Assist
+Uses HVM mode for OSes like Windows (needs CPU
+virtualization support)
+Xen Type 1 vs Type 2 Hypervisors
+Feature Type 1 (Xen) Type 2
+Runs on Bare metal (hardware directly) Runs on host OS
+Examples Xen, VMware ESXi, Microsoft
+Hyper-V
+VirtualBox, VMware
+Workstation
+Performance High performance, low overhead Slightly lower performanceSecurity More secure (minimal layers) Depends on host OS securityEquivalent Hypervisors to Xen
+Hypervisor Type Notes
+KVM Type 1 (in Linux
+kernel)
+Integrated with Linux, uses hardware
+virtualization
+VMware ESXi Type 1 Enterprise-grade, GUI support
+Microsoft
+Hyper-V Type 1 Windows-based hypervisor
+VirtualBox Type 2 Desktop virtualization
+Requirements for Live Migration in Xen
+Shared Storage (e.g., NFS, iSCSI, SAN): Both hosts must access the same
+virtual disk. Same CPU family: Compatible CPU features between source and
+destination.  Network Connectivity: Low-latency, high-speed network between hosts. Xen-compatible tools: xm, xl, or XenAPI-based management like
+XenCenter.  Proper Configuration: Dom0 should have migration tools enabled, with
+firewall ports open.
+XenServer vs XenCenter
+Feature XenServer XenCenter
+Definition Commercial distribution of Xen
+hypervisor
+GUI-based management tool for
+XenServer
+Runs on Physical Server (bare-metal) Windows desktop (client-side
+software)
+Function Creates and runs VMs Manages, monitors, and controls
+XenServer
+Open
+Source?
+XenServer is partly open-source
+(Citrix)
+XenCenter is free but not opensource
+1a)
+Citrix XenServer is a virtualization platform based on the open-source Xen
+Hypervisor. It enables efficient creation, management, and execution of multiple
+virtual machines (VMs) on a single physical host.
+Installation Steps:
+1. Download ISO:
+o Get the official XenServer ISO from Citrix website.
+2. Create Bootable Media:
+o Use tools like Rufus or Ventoy to create a bootable USB with
+XenServer ISO.
+3. BIOS Settings:
+o Enable VT-x / AMD-V (hardware virtualization) and set USB as first
+boot device.
+4. Boot and Install:
+o Insert the USB and boot the server.
+o Follow the on-screen instructions:  Select installation drive (e.g., local disk).  Configure network settings (static IP recommended).  Set root password.  Choose to install XenServer tools
+5. Complete Installation:
+o Reboot system after installation.
+o XenServer boots with a console UI showing IP address and system
+info.
+Live Migration of Virtual Machines using XenCenter
+Live Migration refers to moving a running virtual machine from one
+physical host to another without shutting it down, using XenCenter’s GUI.
+Steps 1:
+Add the new server by clicking the server in the xencenter and server->
+Add
+Steps 2:
+Add the xenserver 1 by entering the Server , Username and password and
+click add.
+Steps 3:
+Next add the vm of yours by clicking the xenserver 1 (right click) and add
+click new vm
+Steps 4:
+Click the template example citric or ubunttu os or cent os(os which you
+have).
+Steps 5: Give the name for your Vm and click next.
+Steps 6: Select the iso file inside and click the next
+Steps 7:
+Finally click the create now option then your vm has been created
+successfully.
+Steps 8: Create a xenserver 2 same procedure followed in first xenserver1 and
+click the xenserver 1.
+ Steps 9:
+ Right click the vm and select the move vm option from the following
+ Steps 10: Select the xenserver 2 from the following list
+Steps 11:
+Now see the Vm in the second server tce and the live migration has been
+executed successfully.
+RESULT:
+Successfully executed the setup of XenServer and XenCenter; live
+migration was performed and output verified with zero downtime during VM
+transfer.

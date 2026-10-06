@@ -1,0 +1,130 @@
+7(a) — Configuration of Hyper-V on Windows
+Aim
+
+To configure Hyper-V on Windows for creating and managing VMs.
+
+Step 1
+
+Open Windows Server → Server Manager → Add Roles and Features.
+
+Click Next on “Before you begin”.
+
+Step 2
+
+Select Role-based or feature-based installation → Next.
+
+Step 3
+
+Select the required Server → Next.
+
+Step 4
+
+Under Server Roles, tick Hyper-V → click Add Features.
+
+Step 5
+
+Enable the required Virtual Switches:
+
+Ethernet
+VirtualBox Host-Only Adapter
+Step 6
+
+For migration, select/use Credential Security Support Provider (CredSSP).
+
+Step 7
+
+Click Install.
+
+Hyper-V is now installed and enabled.
+
+Step 8
+
+Open Server Manager → Tools → Hyper-V Manager.
+
+Result
+
+Hyper-V was successfully configured for creating and managing virtual machines.
+
+7(b) — Creation of VM and PowerShell Management
+A. VM Installation WITHOUT PowerShell
+Step 1
+
+Open:
+
+Tools → Hyper-V Manager → Right-click Server → New → Virtual Machine
+
+Step 2
+
+Specify the VM name and location → Next.
+
+Step 3
+
+Assign memory.
+
+For safety, give 2 GB RAM → Next.
+
+Step 4
+
+Configure network:
+
+Connection → Ethernet/Virtual Switch → Next.
+
+Step 5
+
+Configure virtual hard disk:
+
+Name
+Location
+Maximum size
+
+Click Next.
+
+Step 6
+
+Select Install an operating system from an ISO file.
+
+Select the Ubuntu ISO.
+
+Step 7
+
+Click Finish.
+
+VM is created.
+
+B. VM Installation USING PowerShell
+Step 1 — Create VM
+
+Create the VM with:
+
+VM name
+Memory/space
+Virtual hard disk
+Step 2 — Assign Virtual Switch
+
+Connect the VM to the required virtual switch.
+
+Step 3 — Import ISO
+
+Attach/import the ISO file of the OS to be installed.
+
+Step 4 — Start VM
+
+Start the created VM.
+
+These are the four PowerShell procedure steps given in the PDF.
+
+C. PowerShell Commands
+Get VM and start VM
+Get-VM
+Start-VM -Name "UbuntuVM"
+Stop VM
+Stop-VM -Name "UbuntuVM"
+Migration
+
+In Hyper-V Manager:
+
+Right-click VM → Move → Select destination → Finish.
+
+Result
+
+VM creation and management using Hyper-V and PowerShell were successfully performed.

@@ -1,0 +1,28 @@
+5(a) — KVM Installation & Virtual Instance Creation
+Step 1 — Check virtualization support
+egrep -c '(vmx|svm)' /proc/cpuinfo
+Step 2 — Check Linux kernel
+uname -a
+Step 3 — Check KVM modules
+ls /lib/modules/5.4.0-84-generic/kernel/arch/x86/kvm/kvm*
+Step 4 — Install KVM packages
+sudo apt-get install qemu-kvm libvirt-bin bridge-utils qemu-system virt-manager
+Step 5 — Configure libvirt
+sudo nano /etc/libvirt/libvirtd.conf
+Step 6 — Restart libvirt
+sudo systemctl restart libvirtd
+Step 7 — List running VMs
+virsh list
+Step 8 — Open virtualization terminal
+virsh
+Step 9 — Check libvirt & QEMU version
+version
+Step 10 — Get node information
+nodeinfo
+Step 11 — Create VM using Virt-Manager
+
+Virtual Machine Manager → QEMU/KVM → New → Import existing disk image → Select CirrOS image → Choose RAM & CPU → Give VM name → Finish.
+
+Step 12 — Start VM
+
+The VM boots successfully and login is performed.

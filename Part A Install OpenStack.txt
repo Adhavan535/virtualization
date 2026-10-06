@@ -1,0 +1,125 @@
+Part A: Install OpenStack
+
+1. Update Ubuntu
+
+bash
+sudo apt update && sudo apt upgrade -y
+
+2. Install the required packages
+
+bash
+sudo apt install -y git curl wget net-tools iproute2 python3-pip python3-venv build-essential libssl-dev
+
+3. Create the stack user (home directory /opt/stack)
+
+bash
+sudo adduser --shell /bin/bash --home /opt/stack stack
+
+It asks for a password and the user details (Full Name, etc.). Press Enter to skip the optional fields, then type Y.
+
+4. Give stack passwordless sudo
+
+bash
+echo "stack ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/stack
+
+5. Set the correct permissions on the sudoers file
+
+bash
+sudo chmod 0440 /etc/sudoers.d/stack
+
+6. Switch to the stack user
+
+bash
+sudo su - stack
+
+7. Clone DevStack
+
+bash
+git clone https://git.openstack.org/openstack/devstack
+
+8. Move into the directory
+
+bash
+cd devstack
+
+9. Create or edit the configuration file
+
+bash
+nano local.conf
+
+Paste this in, then save with Ctrl+O, Enter, Ctrl+X:
+
+ini
+[[local|localrc]]
+ADMIN_PASSWORD=your_password
+DATABASE_PASSWORD=$ADMIN_PASSWORD
+RABBIT_PASSWORD=$ADMIN_PASSWORD
+SERVICE_PASSWORD=$ADMIN_PASSWORD
+
+DEST=/opt/stack
+HOST_IP=192.168.1.10
+
+Set HOST_IP to your machine's actual IP. You can find it with ip a.
+
+10. Run the installation (takes 20–40 minutes)
+
+bash
+./stack.sh
+
+11. Open the dashboard
+
+In a browser, go to http://<HOST_IP>/dashboard. Log in with user admin (or demo) and the password from local.conf.
+
+Part B: Create a virtual machine
+
+a) Load the OpenStack credentials
+
+bash
+source ~/devstack/openrc admin admin
+
+b) Check the available images and flavors
+
+bash
+openstack image list
+openstack flavor list
+
+Note the image name (e.g. cirros-0.6.x-x86_64-disk) and flavor (e.g. m1.tiny).
+
+c) Create a key pair
+
+bash
+openstack keypair create mykey > mykey.pem
+chmod 600 mykey.pem
+
+d) Check the network
+
+bash
+openstack network list
+
+Note the network ID (e.g. private).
+
+e) Launch the VM
+
+bash
+openstack server create --image <image_name_or_id> --flavor <flavor_name_or_id> --nic net-id=<network_id> --key-name mykey my-first-vm
+
+f) Verify the VM status and IP
+
+bash
+openstack server list
+
+Wait until the status shows ACTIVE.
+
+g) Access the VM
+
+bash
+ssh -i mykey.pem cirros@<vm_ip>
+
+The default CirrOS password is gocubsgo if it asks.
+
+Corrections to your record
+Step 5: your screenshot runs chmod on /etc/sudoers.d/keshooo, but the file you created is /etc/sudoers.d/stack. Use the stack file as above.
+Steps 6–8: your screenshots show a mix of keshooo@ and stack@ prompts, and step 6's screenshot actually shows the git clone. Step 6 should show sudo su - stack.
+Step 11: your local.conf says HOST_IP=192.168.1.10, but the browser screenshot uses 10.0.2.15. These should match the IP you actually configured.
+Step 12: "glace" should be "Glance" (the OpenStack image service).
+Security: don't leave your real password in the report screenshot. Use a placeholder.
